@@ -1,6 +1,9 @@
 {-# OPTIONS_GHC -Wall #-}
 module HW02 where
 
+import Data.List
+
+
 -- Mastermind -----------------------------------------
 
 -- A peg can be one of six colors
@@ -30,7 +33,7 @@ exactMatches xs ys =
 
 -- For each peg in xs, count how many times is occurs in ys
 countColors :: Code -> [Int]
-countColors [] = [0, 0, 0, 0, 0, 0]
+countColors [] = unfoldr (\x -> if x == 0 then Nothing else Just (0, x - 1)) (length colors)
 countColors xs = 
   let incList inc = \ys -> let (ress, _) = foldl (
                                                    \(rs, i) x -> 
